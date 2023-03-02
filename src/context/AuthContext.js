@@ -9,9 +9,9 @@ export const AuthProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
-  const login = (username, password) => {
+  const login = async (username, password) => {
     setIsLoading(true);
-    loginService(username, password)
+    await loginService(username, password)
       .then((response) => {
         setUserInfo(response.user);
         const { id } = response?.session;

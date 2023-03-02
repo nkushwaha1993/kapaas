@@ -1,1 +1,1 @@
-export const BASE_URL = "https://kapas.loca.lt";
+export const BASE_URL = "http://localhost:8080";
