@@ -1,18 +1,10 @@
-import { useColorScheme } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from "@react-navigation/native";
-import AppDarkTheme from "./src/themes/appDarkTheme";
-import AppLightTheme from "./src/themes/appLightTheme";
-import AuthStack from "./src/navigation/AuthStack";
+import { AuthProvider } from "./src/context/AuthContext";
+import AppNav from "./src/navigation/AppNav";
 
 export default function App() {
-  const scheme = useColorScheme();
   return (
-    <NavigationContainer
-      theme={scheme === "dark" ? AppDarkTheme : AppLightTheme}
-    >
-      <AuthStack />
-      <StatusBar style="auto" />
-    </NavigationContainer>
+    <AuthProvider>
+      <AppNav />
+    </AuthProvider>
   );
 }
