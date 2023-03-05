@@ -29,15 +29,12 @@ export const AuthProvider = ({ children }) => {
   const logOut = () => {
     setIsLoading(true);
     setUserToken(null);
-    // AsyncStorage.removeItem("userToken");
-    // AsyncStorage.removeItem("userInfo");
+    AsyncStorage.removeItem("userToken");
+    AsyncStorage.removeItem("userInfo");
     setIsLoading(false);
   };
 
   const isLoggedIn = async () => {
-    setUserToken(null);
-    AsyncStorage.removeItem("userToken");
-    AsyncStorage.removeItem("userInfo");
     try {
       setIsLoading(true);
       const userData = await retrieveToken();
