@@ -7,7 +7,6 @@ import AppLightTheme from "../themes/appLightTheme";
 import AuthStack from "./AuthStack";
 import { AuthContext } from "../context/AuthContext";
 import AppStack from "./AppStack";
-import MyDrawer from "./Drawer";
 
 const AppNav = () => {
   const scheme = useColorScheme();
@@ -24,7 +23,7 @@ const AppNav = () => {
     <NavigationContainer
       theme={scheme === "dark" ? AppDarkTheme : AppLightTheme}
     >
-      {userToken !== null ? <MyDrawer /> : <AuthStack />}
+      {userToken !== null ? <AppStack /> : <AuthStack />}
       <StatusBar style="auto" />
     </NavigationContainer>
   );

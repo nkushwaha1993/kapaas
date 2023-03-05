@@ -37,9 +37,6 @@ const tiles = [
 const HomeScreen = ({ navigation }) => {
   return (
     <View>
-      <View style={styles.header}>
-        <Text >Home Page</Text>
-      </View>
       <View style={styles.container}>        
           {tiles.map(tile => (
             <TouchableHighlight
@@ -97,14 +94,6 @@ const styles = StyleSheet.create({
       height: 1,
     },
     textShadowRadius: 2,
-  },
-  header: {
-    width : '100%',
-    height : '15%',
-    backgroundColor :'#c8c8c8',
-    alignItems : 'center',
-    justifyContent : 'center',
-    marginTop : '15%'
   },
   inner : {
     flex : 1,
