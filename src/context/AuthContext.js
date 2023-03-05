@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState, createContext, useEffect } from "react";
 import { login as loginService } from "../services";
+import { storeToken, retrieveToken } from "../config";
 
 export const AuthContext = createContext();
 
@@ -16,8 +17,7 @@ export const AuthProvider = ({ children }) => {
         setUserInfo(response.user);
         const { id } = response?.session;
         setUserToken(id);
-        AsyncStorage.setItem("userInfo", JSON.stringify(response?.session));
-        AsyncStorage.setItem("userToken", id);
+        storeToken(response);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -29,24 +29,22 @@ export const AuthProvider = ({ children }) => {
   const logOut = () => {
     setIsLoading(true);
     setUserToken(null);
-    AsyncStorage.removeItem("userToken");
-    AsyncStorage.removeItem("userInfo");
+    // AsyncStorage.removeItem("userToken");
+    // AsyncStorage.removeItem("userInfo");
     setIsLoading(false);
   };
 
   const isLoggedIn = async () => {
-    // setUserToken(null);
-    // AsyncStorage.removeItem("userToken");
+    setUserToken(null);
+    AsyncStorage.removeItem("userToken");
+    AsyncStorage.removeItem("userInfo");
     try {
       setIsLoading(true);
-      let userToken = await AsyncStorage.getItem("userToken");
-      let userInfo = await AsyncStorage.getItem("userInfo");
-      userInfo = JSON.parse(userInfo);
-      if (userInfo) {
-        setUserInfo(userInfo);
-        setUserToken(userToken);
+      const userData = await retrieveToken();
+      if (userData) {
+        setUserInfo(userData.userInfo);
+        setUserToken(userData.userToken);
       }
-      setUserToken(userToken);
       setIsLoading(false);
     } catch (e) {
       console.log(`isLogged in error ${e}`);
