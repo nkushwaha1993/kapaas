@@ -1,3 +1,3 @@
-import { login } from "./login.service";
+import { login, logout } from "./login.service";
 
-export { login };
+export { login, logout };
