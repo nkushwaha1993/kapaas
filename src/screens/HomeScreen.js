@@ -6,21 +6,25 @@ const tiles = [
     title: "Generate Token",
     page: "Page1",
     color: "red",
+    profile: "Generate Token",
   },
   {
     title: "Quality Check",
     page: "Page2",
     color: "green",
+    profile: "Generate Token",
   },
   {
     title: "Weighing",
     page: "Page3",
     color: "blue",
+    profile: "Generate Token",
   },
   {
     title: "Payment and Billing",
     page: "Page4",
     color: "yellow",
+    profile: "Generate Token",
   },
 ];
 
@@ -32,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
           <TouchableHighlight
             key={tile.title}
             underlayColor="lightgray"
-            onPress={() => console.log(`Navigating to ${tile.page}`)}
+            onPress={() => navigation.navigate(tile.profile)}
             style={[styles.tile]}
           >
             <View style={styles.inner}>
