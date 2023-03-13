@@ -3,8 +3,8 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import AppDrawer from "./AppDrawer";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HomeScreen from "../screens/HomeScreen";
-import AppVendorTab from "./AppVendorTab";
-import GenerateTokenScreen from "../screens/GenerateTokenScreen";
+import GenerateTokenTabs from "../screens/GenerateTokenTabs";
+//import GenerateTokenScreen from "../screens/GenerateTokenScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -32,7 +32,7 @@ const AppStack = () => {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="VendorSearch"
         component={AppVendorTab}
         options={{
@@ -40,10 +40,10 @@ const AppStack = () => {
             <Ionicons name="search-circle-outline" size={22} color={color} />
           ),
         }} 
-      />  
+      />   */}
       <Drawer.Screen 
         name="Generate Token"
-        component={GenerateTokenScreen}
+        component={GenerateTokenTabs}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="key-outline" size={22} color={color} />
