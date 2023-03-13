@@ -3,6 +3,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import AppDrawer from "./AppDrawer";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HomeScreen from "../screens/HomeScreen";
+import GenerateTokenScreen from "../screens/GenerateTokenScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -32,14 +33,14 @@ const AppStack = () => {
       />
       <Drawer.Screen
         name="Generate Token"
-        component={""}
+        component={GenerateTokenScreen}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="key-outline" size={22} color={color} />
           ),
         }}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name="Quality Check"
         component={""}
         options={{
@@ -48,7 +49,7 @@ const AppStack = () => {
           ),
         }}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name="Weighing"
         component={""}
         options={{
@@ -57,7 +58,7 @@ const AppStack = () => {
           ),
         }}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name="Payment and Billing"
         component={""}
         options={{
@@ -67,7 +68,6 @@ const AppStack = () => {
         }}
       />
     </Drawer.Navigator>
-    
   );
 };
 
