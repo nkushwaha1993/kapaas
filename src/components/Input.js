@@ -16,7 +16,7 @@ const COLORS = {
 const Input = ({
   label,
   iconName,
-  //   error,
+  error,
   password,
   onFocus = () => {},
   ...props
@@ -50,11 +50,11 @@ const Input = ({
           {...props}
         />
       </View>
-      {/* {error && (
+      {error && (
         <Text style={{ marginTop: 7, color: COLORS.red, fontSize: 12 }}>
           {error}
         </Text>
-      )} */}
+      )}
     </View>
   );
 };
