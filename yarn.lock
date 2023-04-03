@@ -5677,13 +5677,6 @@ react-native-codegen@^0.70.6:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-react-native-document-picker@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-8.2.0.tgz#d0d2f9ff8667e90e7ff6f9733077043e3f86d1a9"
-  integrity sha512-S/n4DIHWC0DTrtJnj2WZZleIfN4C2QjPMUpe8l/URt2Gc3/95dxkyfp4Dz4d7aZq5yEVFkdAvXv0nyWkM5w4MA==
-  dependencies:
-    invariant "^2.2.4"
-
 react-native-dropdown-select-list@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-native-dropdown-select-list/-/react-native-dropdown-select-list-2.0.4.tgz#bd63d684dd9b840d50e022985f9d0fa69eee1c2a"
@@ -5704,11 +5697,6 @@ react-native-gradle-plugin@^0.70.3:
   version "0.70.3"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz#cbcf0619cbfbddaa9128701aa2d7b4145f9c4fc8"
   integrity sha512-oOanj84fJEXUg9FoEAQomA8ISG+DVIrTZ3qF7m69VQUJyOGYyDZmPqKcjvRku4KXlEH6hWO9i4ACLzNBh8gC0A==
-
-react-native-image-picker@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-5.3.1.tgz#836ab13c228174728a0bd68293b27dc5e1affa0f"
-  integrity sha512-zRCjtlE3KOeaWDM8gXzTwXfvo3ZeF2XMkHceU7CVCtKRleKxna/E4XWIPu/lXO2qlMdnSx1WvfPSbqzAX0qxpA==
 
 react-native-reanimated@~2.12.0:
   version "2.12.0"
