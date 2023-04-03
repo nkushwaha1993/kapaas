@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   SafeAreaView,
+  Alert
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
@@ -27,6 +28,7 @@ const LoginScreen = ({ navigation }) => {
         setError("");
       })
       .catch((error) => {
+        Alert(error.message)
         console.log(error.message);
         setError(error.message);
       });
