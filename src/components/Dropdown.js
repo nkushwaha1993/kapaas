@@ -10,16 +10,18 @@ const Dropdown = ({
   data,
   onSelect,
   placeholder,
+  selected,
+  setSelected,
+  error,
   ...props
 }) => {
-  const [selected, setSelected] = React.useState("");
   return (
     <View style={{ marginBottom: 20 }}>
       <Text style={style.label}>{label}</Text>
       <View style={style.selectListView}>
         <Icon name={iconName} style={style.icons} />
         <SelectList
-          onSelect={() => alert(selected)}
+          onSelect={onSelect}
           setSelected={setSelected}
           data={data}
           arrowicon={<Icon name="chevron-down" style={style.arrowIcon} />}
@@ -31,6 +33,11 @@ const Dropdown = ({
           {...props}
         />
       </View>
+      {error && (
+        <Text style={{ marginTop: 7, color: COLORS.red, fontSize: 12 }}>
+          {error}
+        </Text>
+      )}
     </View>
   );
 };

@@ -7,3 +7,9 @@ export const COLORS = {
   darkBlue: "#7978B5",
   red: "red",
 };
+
+export const ADHAAR_CARD_LENGTH = 12;
+export const VOTER_ID_CARD_LENGTH = 10;
+export const PAN_CARD_LENGTH = 10;
+export const LICENSE_CARD_LENGTH = 18;
+export const MOBILE_NUMBER_LENGTH = 10;
