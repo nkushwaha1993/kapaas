@@ -2,13 +2,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
 export const storeToken = async (userData) => {
-  const now = new Date();
-  const expiration = new Date(now.getTime() + 60 * 60 * 1000); // 1 hour from now
-  const { id } = userData.session;
+  const { id, expiresAt } = userData.session;
   const data = {
     userToken: id,
     userInfo: userData.user,
-    expiration: expiration.toISOString(),
+    expiration: expiresAt,
   };
   AsyncStorage.setItem("userData", JSON.stringify(data));
 };

@@ -1,27 +1,17 @@
 import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
-// import COLORS from "../../conts/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-const COLORS = {
-  white: "#fff",
-  black: "#000",
-  blue: "#5D5FEE",
-  grey: "#BABBC3",
-  light: "#F3F4FB",
-  darkBlue: "#7978B5",
-  red: "red",
-};
+import { COLORS } from "../constants/constants";
 
 const Input = ({
   label,
   iconName,
-  //   error,
+  error,
   password,
+  height,
   onFocus = () => {},
   ...props
 }) => {
-  //   const [hidePassword, setHidePassword] = React.useState(password);
   const [isFocused, setIsFocused] = React.useState(false);
   return (
     <View style={{ marginBottom: 20 }}>
@@ -32,6 +22,7 @@ const Input = ({
           {
             borderColor: isFocused ? COLORS.darkBlue : COLORS.light,
             alignItems: "center",
+            height: height ? height : 55,
           },
         ]}
       >
@@ -50,11 +41,11 @@ const Input = ({
           {...props}
         />
       </View>
-      {/* {error && (
+      {error && (
         <Text style={{ marginTop: 7, color: COLORS.red, fontSize: 12 }}>
           {error}
         </Text>
-      )} */}
+      )}
     </View>
   );
 };
@@ -66,7 +57,6 @@ const style = StyleSheet.create({
     color: COLORS.grey,
   },
   inputContainer: {
-    height: 55,
     backgroundColor: COLORS.light,
     flexDirection: "row",
     paddingHorizontal: 15,

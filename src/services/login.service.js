@@ -23,13 +23,6 @@ export const login = async (username, password) => {
         throw new Error("Login failed");
       }
     })
-    .then((data) => {
-      if (data) {
-        return data;
-      } else {
-        throw new Error("Login failed");
-      }
-    })
     .catch((error) => {
       console.log("Login error", error);
       throw error;
@@ -37,24 +30,19 @@ export const login = async (username, password) => {
 };
 
 export const logout = async (userToken) => {
+  console.log("userToken", userToken,BASE_URL);
+
   return await axios
-    .delete(`${BASE_URL}/logout`, null, {
+    .delete(`${BASE_URL}/logout`,  {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "session-id": userToken,
+        "Session-Id": userToken,
       },
     })
     .then((response) => {
       if (response.data) {
         return response.data;
-      } else {
-        throw new Error("Logout failed");
-      }
-    })
-    .then((data) => {
-      if (data) {
-        return data;
       } else {
         throw new Error("Logout failed");
       }
