@@ -1,8 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { COLORS } from "../constants/constants";
 import { SelectList } from "react-native-dropdown-select-list";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Dropdown = ({
   label,
@@ -13,10 +15,11 @@ const Dropdown = ({
   selected,
   setSelected,
   error,
+  width = 1,
   ...props
 }) => {
   return (
-    <View style={{ marginBottom: 20 }}>
+    <View style={{ marginBottom: 20, width: SCREEN_WIDTH * width }}>
       <Text style={style.label}>{label}</Text>
       <View style={style.selectListView}>
         <Icon name={iconName} style={style.icons} />

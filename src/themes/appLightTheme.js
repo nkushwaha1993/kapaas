@@ -9,7 +9,7 @@ const AppLightTheme = {
         card: '#f9f9f9',
         border: '#9F9F9F',
         primary: '#333333',
-        background: '#ffffff',
+        background:'#e0f2fe'
     }
 }
 

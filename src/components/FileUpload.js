@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Button, Image, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as DocumentPicker from "expo-document-picker";
 
-const FileUpload = ({ setSelectedFile }) => {
+const FileUpload = ({ setFieldValue }) => {
   const [imageSource, setImageSource] = useState(null);
   const [fileSource, setFileSource] = useState(null);
+
+  useEffect(() => {
+    (imageSource || fileSource) && handleUpload();
+  }, [imageSource, fileSource]);
 
   const handleImagePicker = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -21,9 +25,8 @@ const FileUpload = ({ setSelectedFile }) => {
     });
 
     if (!result.canceled) {
-      setImageSource(result.assets[0].uri).then(() => {
-        handleUpload();
-      });
+      console.log(result.assets[0].uri);
+      setImageSource(result.assets[0].uri);
     }
   };
 
@@ -33,14 +36,13 @@ const FileUpload = ({ setSelectedFile }) => {
     });
 
     if (result.type === "success") {
-      setFileSource(result.uri).then(() => {
-        handleUpload();
-      });
+      setFileSource(result.uri);
     }
   };
 
   const handleUpload = () => {
     const formData = new FormData();
+    console.log(imageSource);
     if (imageSource) {
       const uriParts = imageSource.split(".");
       const fileType = uriParts[uriParts.length - 1];
@@ -59,25 +61,25 @@ const FileUpload = ({ setSelectedFile }) => {
         type: "*/*",
       });
     }
-    setSelectedFile(formData);
+    setFieldValue("uploadFiles", formData);
+    console.log(formData);
   };
 
   return (
     <View>
       <Button title="Upload" onPress={handleImagePicker} />
       {imageSource && (
-        <Image
-          source={{ uri: imageSource }}
-          style={{ width: 200, height: 200 }}
-        />
+        <View style={{ marginVertical: 10, alignItems: "center" }}>
+          <Image
+            source={{ uri: imageSource }}
+            style={{ width: 200, height: 200 }}
+          />
+        </View>
       )}
-      <Button title="Select File" onPress={handleFilePicker} />
-      {fileSource && <Text>{fileSource}</Text>}
-      {/* <Button
-        title="Upload"
-        onPress={handleUpload}
-        disabled={!imageSource && !fileSource}
-      /> */}
+      <View style={{ marginVertical: 20 }}>
+        <Button title="Select File" onPress={handleFilePicker} />
+        {fileSource && <Text>{fileSource}</Text>}
+      </View>
     </View>
   );
 };
