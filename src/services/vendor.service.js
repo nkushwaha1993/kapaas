@@ -19,6 +19,7 @@ export const vendorSearch = async (searchInput) => {
       }
     )
     .then((response) => {
+      console.log("Search", response);
       if (response.data) {
         return response.data.content;
       } else {

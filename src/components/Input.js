@@ -1,7 +1,10 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { View, Dimensions } from "react-native";
+import { TextInput } from "react-native-paper";
 import { COLORS } from "../constants/constants";
+import ErrorComponent from "./common/ErrorComponent";
+
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Input = ({
   label,
@@ -9,59 +12,29 @@ const Input = ({
   error,
   password,
   height,
-  onFocus = () => {},
+  width = 1,
   ...props
 }) => {
-  const [isFocused, setIsFocused] = React.useState(false);
   return (
     <View style={{ marginBottom: 20 }}>
-      <Text style={style.label}>{label}</Text>
-      <View
-        style={[
-          style.inputContainer,
-          {
-            borderColor: isFocused ? COLORS.darkBlue : COLORS.light,
-            alignItems: "center",
-            height: height ? height : 55,
-          },
-        ]}
-      >
-        <Icon
-          name={iconName}
-          style={{ color: COLORS.darkBlue, fontSize: 22, marginRight: 10 }}
-        />
+      <View>
         <TextInput
           autoCorrect={false}
-          onFocus={() => {
-            onFocus();
-            setIsFocused(true);
+          mode="outlined"
+          label={label}
+          style={{
+            backgroundColor: COLORS.light,
+            color: COLORS.darkBlue,
+            flex: 1,
+            height: height ? height : 55,
+            width: SCREEN_WIDTH * width,
           }}
-          onBlur={() => setIsFocused(false)}
-          style={{ color: COLORS.darkBlue, flex: 1 }}
           {...props}
         />
       </View>
-      {error && (
-        <Text style={{ marginTop: 7, color: COLORS.red, fontSize: 12 }}>
-          {error}
-        </Text>
-      )}
+      <ErrorComponent error={error} />
     </View>
   );
 };
-
-const style = StyleSheet.create({
-  label: {
-    marginVertical: 5,
-    fontSize: 14,
-    color: COLORS.grey,
-  },
-  inputContainer: {
-    backgroundColor: COLORS.light,
-    flexDirection: "row",
-    paddingHorizontal: 15,
-    borderWidth: 0.5,
-  },
-});
 
 export default Input;

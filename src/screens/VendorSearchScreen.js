@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   FlatList,
   StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  Platform,
 } from "react-native";
 import { vendorSearch as vendorSearchService } from "../services/vendor.service";
-
-const PAGE_SIZE = 10;
+import Input from "../components/Input";
+import Button from "../components/Button";
+import { COLORS } from "../constants/constants";
+import { Dimensions } from "react-native";
 
 const VendorSearchScreen = () => {
   const [searchText, setSearchText] = useState("");
@@ -17,10 +21,11 @@ const VendorSearchScreen = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    //handleSearch();
+    // handleSearch();
   }, [page]);
 
   const handleSearch = async () => {
+    console.log("handlesearch");
     await vendorSearchService(searchText)
       .then((response) => {
         setSearchResults(response);
@@ -34,58 +39,87 @@ const VendorSearchScreen = () => {
     console.log("Row pressed: ", item);
   };
 
-  const renderRow = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => handleRowPress(item)}
-      style={styles.rowContainer}
-    >
-      <View style={styles.row}>
-        <Text style={styles.rowTitle}>{item.name}</Text>
-        <Text style={styles.rowDescription}>{item.description}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+  // const renderRow = ({ item }) => (
+  //   <TouchableOpacity
+  //     onPress={() => handleRowPress(item)}
+  //     style={styles.rowContainer}
+  //   >
+  //     <View style={styles.row}>
+  //       <Text style={styles.rowTitle}>{item.name}</Text>
+  //       <Text style={styles.rowDescription}>{item.description}</Text>
+  //     </View>
+  //   </TouchableOpacity>
+  // );
 
-  const render = ({ item }) => ( 
-      <TouchableOpacity>
-        <Text>
-          {item.firstName} , {item.lastName}
-        </Text>
-      </TouchableOpacity>   
-  );
+  // const render = ({ item }) => (
+  //   <TouchableOpacity>
+  //     <Text>
+  //       {item.firstName} , {item.lastName}
+  //     </Text>
+  //   </TouchableOpacity>
+  // );
+
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search"
-          value={searchText}
-          onChangeText={setSearchText}
-        />
-        <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-          <Text style={styles.searchButtonText}>Search</Text>
-        </TouchableOpacity>
-      </View>
-      
-        {searchResults && (
-          <FlatList
-            data={searchResults}
-            renderItem={render}
-            keyExtractor={(item) => item.id.toString()}
-            style={styles.resultsList}
+    <SafeAreaView style={{  flex: 1 }}>
+      <ScrollView contentContainerStyle={{ paddingEnd: 40 }}>
+        <View
+          style={{
+            marginVertical: 20,
+            paddingHorizontal: 20,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Input
+            onChangeText={setSearchText}
+            value={searchText}
+            placeholder="Search"
+            width={0.7}
           />
-        )}
-      
-    </View>
+          <View
+            style={{
+              marginBottom: 12,
+              paddingHorizontal: 5,
+              borderRadius: 8,
+            }}
+          >
+            <Button
+              title=""
+              onPress={handleSearch}
+              iconName="magnify"
+              width={0.2}
+              buttonStyle={{ paddingHorizontal: 20, borderRadius: 4 }}
+            />
+          </View>
+        </View>
+      </ScrollView>
+      {/* {searchResults && (
+        <FlatList
+          data={searchResults}
+          renderItem={render}
+          keyExtractor={(item) => item.id.toString()}
+          style={styles.resultsList}
+        />
+      )} */}
+    </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingVertical: 24,
-    paddingHorizontal: 16,
+    flexDirection: "row",
+    marginHorizontal: 10,
+    width: "100%",
+  },
+  input: {
+    borderColor: COLORS.darkBlue,
+    alignItems: "center",
+    height: 55,
+    width: "100%",
+    backgroundColor: COLORS.light,
+    flexDirection: "row",
+    paddingHorizontal: 15,
+    borderWidth: 0.5,
   },
   searchContainer: {
     flexDirection: "row",
@@ -101,7 +135,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
     paddingVertical: 16,
-    paddingHorizontal: 8,
+    width: "100%",
   },
   searchButton: {
     backgroundColor: "#007AFF",

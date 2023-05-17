@@ -41,16 +41,8 @@ const GenerateTokenTabs = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        {selectedTab === 0 ? (
-          <Text>
-            <VendorSearchScreen />
-          </Text>
-        ) : (
-          <Text>
-            <GenerateTokenScreen />
-          </Text>
-        )}
+      <View style={{ flex: 1 }}>
+        {selectedTab === 0 ? <VendorSearchScreen /> : <GenerateTokenScreen />}
       </View>
     </View>
   );

@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import FileUpload from "../components/FileUpload";
 import { Formik } from "formik";
-import Dropdown from "../components/Dropdown";
 import {
-  COLORS,
   ADHAAR_CARD_LENGTH,
   LICENSE_CARD_LENGTH,
   MOBILE_NUMBER_LENGTH,
@@ -14,14 +12,12 @@ import {
   PAN_CARD_LENGTH,
 } from "../constants/constants";
 import * as Yup from "yup";
+import StateDropdown from "../components/common/StateDropdown";
+import CityDropdown from "../components/common/CityDropdown";
+import CustomDropdown from "../components/CustomDropdown";
 
-const GenerateTokenScreen = ({ navigation }) => {
-  const [selectedState, setSelectedState] = React.useState("");
-  const [selectedCity, setSelectedCity] = React.useState("");
-  const [selectedIdType, setSelectedIdtype] = React.useState("Id");
-  const [mobileNumber, setMobileNumber] = React.useState("");
-  const [selectedFile, setSelectedFile] = React.useState(null);
-
+const GenerateTokenScreen = ({ navigation, route }) => {
+  const [selectedIdType, setSelectedIdType] = useState("");
   const getIdLength = () => {
     switch (selectedIdType) {
       case "Adhaar Card":
@@ -81,16 +77,34 @@ const GenerateTokenScreen = ({ navigation }) => {
 
   const handleMobileNumberChange = (value, setFieldValue) => {
     const formattedMobileNumber = value.replace(/[^0-9]/g, "");
-    setMobileNumber(formattedMobileNumber);
     setFieldValue("mobile", formattedMobileNumber);
   };
 
+  const onSelectIdChange = (selectedId, setFieldValue) => {
+    setSelectedIdType(selectedId.value);
+    setFieldValue("idType", selectedId.value);
+  };
+
+  const handleState = (selectedItems, setFieldValue) => {
+    setFieldValue("state", selectedItems.value);
+  };
+
+  const handleCity = (selectedItems, setFieldValue) => {
+    setFieldValue("city", selectedItems.value);
+  };
+
   return (
-    <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
-        contentContainerStyle={{ paddingTop: 10, paddingHorizontal: 20 }}
+        style={{ flexGrow: 1 }}
+        contentContainerStyle={{
+          paddingTop: 10,
+          paddingHorizontal: 20,
+          paddingBottom: 20,
+        }}
+        showsVerticalScrollIndicator={true}
       >
-        <View style={{ marginVertical: 20 }}>
+        <View style={{ marginVertical: 20, flex: 1 }}>
           <Formik
             initialValues={initialValues()}
             onSubmit={onSubmithandler}
@@ -110,10 +124,11 @@ const GenerateTokenScreen = ({ navigation }) => {
                   onBlur={handleBlur("fullName")}
                   value={values.fullName}
                   iconName="account-outline"
-                  label="Full Name"
+                  label={"Full Name"}
                   placeholder="Enter your full name"
                   error={errors.fullName}
                   maxLength={50}
+                  width={0.9}
                 />
                 <Input
                   onChangeText={handleChange("address")}
@@ -124,35 +139,24 @@ const GenerateTokenScreen = ({ navigation }) => {
                   placeholder="Enter your address"
                   error={errors.address}
                   height={100}
+                  width={0.9}
                 />
-                <Dropdown
-                  selected={selectedState}
-                  setSelected={setSelectedState}
-                  onSelect={() => setFieldValue("state", selectedState)}
+                <StateDropdown
+                  onChange={(event) => handleState(event, setFieldValue)}
                   value={values.state}
-                  iconName="map-marker-radius-outline"
-                  label="State"
-                  placeholder="Select State"
-                  data={["Maharashtra", "MadhyaPradesh"]}
                   error={errors.state}
-                ></Dropdown>
-                <Dropdown
+                />
+                <CityDropdown
+                  onChange={(event) => handleCity(event, setFieldValue)}
                   value={values.city}
-                  selected={selectedCity}
-                  setSelected={setSelectedCity}
-                  onSelect={() => setFieldValue("city", selectedCity)}
-                  iconName="office-building-marker-outline"
-                  label="City"
-                  placeholder="Select City"
-                  data={["Pune", "Indore"]}
                   error={errors.city}
-                ></Dropdown>
+                />
                 <Input
                   onChangeText={(event) => {
                     handleMobileNumberChange(event, setFieldValue);
                   }}
                   onBlur={handleBlur("mobile")}
-                  value={mobileNumber}
+                  value={values.mobile}
                   iconName="phone"
                   label="Mobile Number"
                   placeholder="Enter your mobile number"
@@ -160,18 +164,35 @@ const GenerateTokenScreen = ({ navigation }) => {
                   keyboardType="numeric"
                   maxLength={MOBILE_NUMBER_LENGTH}
                   onKeyPress={handleKeyPress}
+                  width={0.9}
                 />
-                <Dropdown
-                  value={values.idType}
-                  selected={selectedIdType}
-                  setSelected={setSelectedIdtype}
-                  onSelect={() => setFieldValue("idType", selectedIdType)}
-                  iconName="contacts-outline"
-                  label="ID Proof Type"
-                  data={["Adhaar Card", "Voter Id", "Pan Card", "License"]}
+                <CustomDropdown
+                  data={[
+                    {
+                      value: "Adhaar Card",
+                      label: "Adhaar Card",
+                    },
+                    {
+                      value: "Voter Id",
+                      label: "Voter Id",
+                    },
+                    {
+                      value: "Pan Card",
+                      label: "Pan Card",
+                    },
+                    {
+                      value: "License",
+                      label: "License",
+                    },
+                  ]}
+                  search={false}
                   placeholder="Select Id type"
+                  value={values.idType}
+                  onChange={(event) => {
+                    onSelectIdChange(event, setFieldValue);
+                  }}
                   error={errors.idType}
-                ></Dropdown>
+                ></CustomDropdown>
                 <Input
                   onChangeText={handleChange("id")}
                   onBlur={handleBlur("id")}
@@ -181,6 +202,7 @@ const GenerateTokenScreen = ({ navigation }) => {
                   placeholder="Enter your ID"
                   error={errors.id}
                   maxLength={getIdLength()}
+                  width={0.9}
                 />
                 <Input
                   onChangeText={handleChange("vehicleNumber")}
@@ -191,12 +213,14 @@ const GenerateTokenScreen = ({ navigation }) => {
                   placeholder="Enter your Vehicle Number"
                   error={errors.vehicleNumber}
                   maxLength={10}
+                  width={0.9}
                 />
-                <FileUpload
-                  selectedFile={selectedFile}
-                  setSelectedFile={setSelectedFile}
+                <FileUpload setFieldValue={setFieldValue} />
+                <Button
+                  title="Generate Token"
+                  onPress={handleSubmit}
+                  width={0.9}
                 />
-                <Button title="Generate Token" onPress={handleSubmit} />
               </>
             )}
           </Formik>
