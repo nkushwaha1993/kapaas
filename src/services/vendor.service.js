@@ -1,35 +1,31 @@
-import axios from "axios";
-import { BASE_URL,retrieveToken } from "../config";
+import axios from 'axios'
+import { BASE_URL, retrieveToken } from '../config'
 
-export const vendorSearch = async (searchInput) => {
-  const {userToken} = await retrieveToken();
-  console.log("User Token : %O",userToken);
+export const getVendorsList = async (searchInput) => {
+  const { userToken } = await retrieveToken()
   return await axios
     .post(
       `${BASE_URL}/vendor/search`,
       {
-        name: searchInput,
+        name: searchInput
       },
       {
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Session-Id": userToken,
-        },
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Session-Id': userToken
+        }
       }
     )
     .then((response) => {
-      console.log("Search", response);
       if (response.data) {
-        return response.data.content;
+        return response.data.content
       } else {
-        throw new Error("Search failed");
+        throw new Error('Search failed')
       }
     })
     .catch((error) => {
-      console.log("Search error", error);
-      throw error;
-    });
-};
-
-
+      console.log('Search error', error)
+      throw error
+    })
+}

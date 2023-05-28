@@ -1,19 +1,14 @@
-import * as React from "react";
-import { Searchbar } from "react-native-paper";
-import { View, Text } from "react-native";
+import * as React from 'react'
+import { Searchbar } from 'react-native-paper'
+import { View } from 'react-native'
 
-const SearchbarComponent = ({
-  placeholder,
-  onSearchChange,
-  id,
-  searchResults,
-}) => {
-  const [searchQuery, setSearchQuery] = React.useState("");
+const SearchbarComponent = ({ placeholder, onSearchChange }) => {
+  const [searchQuery, setSearchQuery] = React.useState('')
 
   const onChangeSearch = (query) => {
-    setSearchQuery(query);
-    onSearchChange(query, id);
-  };
+    setSearchQuery(query)
+    onSearchChange(query)
+  }
 
   return (
     <View>
@@ -21,12 +16,10 @@ const SearchbarComponent = ({
         placeholder={placeholder}
         onChangeText={onChangeSearch}
         value={searchQuery}
+        style={{ backgroundColor: 'white' }}
       />
-      {searchResults.map((result) => (
-        <Text key={result.id}>{result.value}</Text>
-      ))}
     </View>
-  );
-};
+  )
+}
 
-export default SearchbarComponent;
+export default SearchbarComponent

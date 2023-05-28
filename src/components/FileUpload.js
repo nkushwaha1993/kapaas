@@ -1,75 +1,76 @@
-import React, { useState, useEffect } from "react";
-import { View, Button, Image, Text } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import * as DocumentPicker from "expo-document-picker";
+import React, { useState, useEffect } from 'react'
+import { View, Button, Image, Text, Dimensions } from 'react-native'
+import * as ImagePicker from 'expo-image-picker'
+import * as DocumentPicker from 'expo-document-picker'
+const SCREEN_WIDTH = Dimensions.get('window').width
 
 const FileUpload = ({ setFieldValue }) => {
-  const [imageSource, setImageSource] = useState(null);
-  const [fileSource, setFileSource] = useState(null);
+  const [imageSource, setImageSource] = useState(null)
+  const [fileSource, setFileSource] = useState(null)
 
   useEffect(() => {
-    (imageSource || fileSource) && handleUpload();
-  }, [imageSource, fileSource]);
+    (imageSource || fileSource) && handleUpload()
+  }, [imageSource, fileSource])
 
   const handleImagePicker = async () => {
-    const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== "granted") {
-      console.log("Permission denied");
-      return;
+    const { status } = await ImagePicker.requestCameraPermissionsAsync()
+    if (status !== 'granted') {
+      console.log('Permission denied')
+      return
     }
 
     const result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      quality: 1,
-    });
+      quality: 1
+    })
 
     if (!result.canceled) {
-      console.log(result.assets[0].uri);
-      setImageSource(result.assets[0].uri);
+      console.log(result.assets[0].uri)
+      setImageSource(result.assets[0].uri)
     }
-  };
+  }
 
   const handleFilePicker = async () => {
     const result = await DocumentPicker.getDocumentAsync({
-      type: "*/*",
-    });
+      type: '*/*'
+    })
 
-    if (result.type === "success") {
-      setFileSource(result.uri);
+    if (result.type === 'success') {
+      setFileSource(result.uri)
     }
-  };
+  }
 
   const handleUpload = () => {
-    const formData = new FormData();
-    console.log(imageSource);
+    const formData = new FormData()
+    console.log(imageSource)
     if (imageSource) {
-      const uriParts = imageSource.split(".");
-      const fileType = uriParts[uriParts.length - 1];
-      formData.append("image", {
+      const uriParts = imageSource.split('.')
+      const fileType = uriParts[uriParts.length - 1]
+      formData.append('image', {
         uri: imageSource,
         name: `image.${fileType}`,
-        type: `image/${fileType}`,
-      });
+        type: `image/${fileType}`
+      })
     }
     if (fileSource) {
-      const uriParts = fileSource.split("/");
-      const fileName = uriParts[uriParts.length - 1];
-      formData.append("file", {
+      const uriParts = fileSource.split('/')
+      const fileName = uriParts[uriParts.length - 1]
+      formData.append('file', {
         uri: fileSource,
         name: fileName,
-        type: "*/*",
-      });
+        type: '*/*'
+      })
     }
-    setFieldValue("uploadFiles", formData);
-    console.log(formData);
-  };
+    setFieldValue('uploadFiles', formData)
+    console.log(formData)
+  }
 
   return (
-    <View>
+    <View style={{ width: 0.95 * SCREEN_WIDTH }}>
       <Button title="Upload" onPress={handleImagePicker} />
       {imageSource && (
-        <View style={{ marginVertical: 10, alignItems: "center" }}>
+        <View style={{ marginVertical: 10, alignItems: 'center' }}>
           <Image
             source={{ uri: imageSource }}
             style={{ width: 200, height: 200 }}
@@ -81,7 +82,7 @@ const FileUpload = ({ setFieldValue }) => {
         {fileSource && <Text>{fileSource}</Text>}
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default FileUpload;
+export default FileUpload

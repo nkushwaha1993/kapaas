@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { View } from "react-native";
-import CustomDropdown from "../CustomDropdown";
+import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
+import CustomDropdown from '../CustomDropdown'
 
 const StateDropdown = ({ error, value, onChange }) => {
-  const [stateData, setStateData] = useState([]);
+  const [stateData, setStateData] = useState([])
 
   useEffect(() => {
-    let stateArray = [];
+    const stateArray = []
     stateArray.push(
       {
-        value: "Maharashtra",
-        label: "Maharashtra",
+        value: 'Maharashtra',
+        label: 'Maharashtra'
       },
       {
-        value: "Madhya Pradesh",
-        label: "Madhya Pradesh",
+        value: 'Madhya Pradesh',
+        label: 'Madhya Pradesh'
       }
-    );
-    setStateData(stateArray);
-  }, []);
+    )
+    setStateData(stateArray)
+  }, [])
 
   return (
     <View>
       <CustomDropdown
         data={stateData}
         search={true}
-        placeholder={"Select state"}
+        placeholder={'Select state'}
         value={value}
         onChange={onChange}
         error={error}
       />
     </View>
-  );
-};
+  )
+}
 
-export default StateDropdown;
+export default StateDropdown
