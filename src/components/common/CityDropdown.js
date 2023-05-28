@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { View } from "react-native";
-import CustomDropdown from "../CustomDropdown";
+import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
+import CustomDropdown from '../CustomDropdown'
 
 const CityDropdown = ({ error, value, onChange }) => {
-  const [cityData, setCityData] = useState([]);
+  const [cityData, setCityData] = useState([])
 
   useEffect(() => {
-    let cityArray = [];
+    const cityArray = []
     cityArray.push(
       {
-        value: "Indore",
-        label: "Indore",
+        value: 'Indore',
+        label: 'Indore'
       },
       {
-        value: "Pune",
-        label: "Pune",
+        value: 'Pune',
+        label: 'Pune'
       }
-    );
-    setCityData(cityArray);
-  }, []);
+    )
+    setCityData(cityArray)
+  }, [])
 
   return (
     <View>
       <CustomDropdown
         data={cityData}
         search={true}
-        placeholder={"Select city"}
+        placeholder={'Select city'}
         value={value}
         onChange={onChange}
         error={error}
       />
     </View>
-  );
-};
+  )
+}
 
-export default CityDropdown;
+export default CityDropdown

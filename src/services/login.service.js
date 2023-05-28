@@ -1,5 +1,5 @@
-import axios from "axios";
-import { BASE_URL } from "../config";
+import axios from 'axios'
+import { BASE_URL } from '../config'
 
 export const login = async (username, password) => {
   return await axios
@@ -7,48 +7,48 @@ export const login = async (username, password) => {
       `${BASE_URL}/login`,
       {
         userName: username,
-        password: password,
+        password
       },
       {
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
       }
     )
     .then((response) => {
       if (response.data) {
-        return response.data;
+        return response.data
       } else {
-        throw new Error("Login failed");
+        throw new Error('Login failed')
       }
     })
     .catch((error) => {
-      console.log("Login error", error);
-      throw error;
-    });
-};
+      console.log('Login error', error)
+      throw error
+    })
+}
 
 export const logout = async (userToken) => {
-  console.log("userToken", userToken,BASE_URL);
+  console.log('userToken', userToken, BASE_URL)
 
   return await axios
-    .delete(`${BASE_URL}/logout`,  {
+    .delete(`${BASE_URL}/logout`, {
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Session-Id": userToken,
-      },
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Session-Id': userToken
+      }
     })
     .then((response) => {
       if (response.data) {
-        return response.data;
+        return response.data
       } else {
-        throw new Error("Logout failed");
+        throw new Error('Logout failed')
       }
     })
     .catch((error) => {
-      console.log("Logout error", error);
-      throw error;
-    });
-};
+      console.log('Logout error', error)
+      throw error
+    })
+}

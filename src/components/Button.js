@@ -1,16 +1,16 @@
-import React from "react";
-import { TouchableOpacity, Text, Dimensions } from "react-native";
-import { COLORS } from "../constants/constants";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import React from 'react'
+import { TouchableOpacity, Text, Dimensions } from 'react-native'
+import { COLORS } from '../constants/constants'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_WIDTH = Dimensions.get('window').width
 
 const Button = ({
   title,
   onPress = () => {},
   width = 1,
   iconName,
-  buttonStyle = {},
+  buttonStyle = {}
 }) => {
   return (
     <TouchableOpacity
@@ -22,11 +22,11 @@ const Button = ({
         width: width * SCREEN_WIDTH,
         backgroundColor: COLORS.blue,
         marginVertical: 20,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center'
       }}
     >
-      <Text style={{ color: COLORS.white, fontWeight: "bold", fontSize: 18 }}>
+      <Text style={{ color: COLORS.white, fontWeight: 'bold', fontSize: 18 }}>
         {iconName && (
           <Icon
             name={iconName}
@@ -36,7 +36,7 @@ const Button = ({
         {title}
       </Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

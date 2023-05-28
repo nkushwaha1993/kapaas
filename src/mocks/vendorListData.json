@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "firstname": "Neeraj",
+        "lastName": "Kushwaha",
+        "mobile": "9098393490",
+        "address": "A2-101, Saarthi souvenir society, mahalunge",
+        "state": "Maharashtra",
+        "city": "Pune",
+        "idType": "Adhaar Card",
+        "idNumber": "451787180363",
+        "vehicleNumber": "MP40BC5874"
+    },
+    {
+        "id": "2",
+        "firstname": "Pratik",
+        "lastName": "Malviya",
+        "mobile": "8602084611",
+        "address": "A2-102, Saarthi souvenir society, mahalunge",
+        "state": "Maharashtra",
+        "city": "Indore",
+        "idType": "Adhaar Card",
+        "idNumber": "451787180363",
+        "vehicleNumber": "MP40BC5874"
+    },
+    {
+        "id": "3",
+        "firstname": "Aayushi",
+        "lastName": "pandhre",
+        "mobile": "9098393490",
+        "address": "A2-103, Saarthi souvenir society, mahalunge",
+        "state": "Madhya Pradesh",
+        "city": "Pune",
+        "idType": "Adhaar Card",
+        "idNumber": "451787180363",
+        "vehicleNumber": "MP40BC5874"
+    }
+]

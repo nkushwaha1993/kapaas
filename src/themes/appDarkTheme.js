@@ -1,4 +1,4 @@
-import { DarkTheme } from '@react-navigation/native';
+import { DarkTheme } from '@react-navigation/native'
 
 const AppDarkTheme = {
   ...DarkTheme,
@@ -9,8 +9,8 @@ const AppDarkTheme = {
     card: '#191919',
     border: '#444859',
     primary: '#f9f9f9',
-    background: '#121212',
+    background: '#121212'
   }
 }
 
-export default AppDarkTheme;
+export default AppDarkTheme
