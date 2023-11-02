@@ -10,13 +10,13 @@ const Button = ({ onPress, style, icon }) => (
   </TouchableOpacity>
 )
 
-const VendorCardItem = ({ cardItems }) => {
+const TokenCardItem = ({ cardItems }) => {
   const navigation = useNavigation()
-  const onVendorCardPress = (cardItems) => {
-    navigation.navigate('Generate Token', { vendorDetails: cardItems })
+  const onTokenCardPress = (cardItems) => {
+    navigation.navigate('Generate Token', { tokenDetails: cardItems })
   }
   return (
-    <Card style={styles.card} onPress={() => onVendorCardPress(cardItems)}>
+    <Card style={styles.card} onPress={() => onTokenCardPress(cardItems)}>
       <Card.Content>
         <Title style={styles.title}>
           {cardItems.firstName} {cardItems.lastName}
@@ -40,7 +40,7 @@ const VendorCardItem = ({ cardItems }) => {
     </Card>
   )
 }
-export default VendorCardItem
+export default TokenCardItem
 
 const styles = StyleSheet.create({
   rowView: {

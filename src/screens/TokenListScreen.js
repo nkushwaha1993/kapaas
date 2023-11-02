@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { View, FlatList, SafeAreaView, Dimensions } from 'react-native'
 import SearchbarComponent from '../components/SearchbarComponent'
-import VendorCardItem from '../components/VendorCardItem'
-import { getVendorsList } from '../services/vendor.service'
+import TokenCardItem from '../components/TokenCardItem'
+import { getTokens } from '../services/token.service'
 import { handleError } from '../utility/utils'
+import { isEmpty } from 'lodash'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-const VendorSearchScreen = () => {
+const TokenListScreen = () => {
   const [searchText, setSearchText] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    let timer
-    const getVendorsListData = async () => {
+    const getTokenList = async () => {
       setLoading(true)
-      await getVendorsList(searchText)
+      await getTokens('')
         .then((response) => {
           setLoading(false)
           setSearchResults(response)
@@ -25,9 +25,26 @@ const VendorSearchScreen = () => {
           handleError(error)
         })
     }
+    getTokenList()
+  }, [])
+
+  useEffect(() => {
+    let timer
+    const getTokenList = async () => {
+      setLoading(true)
+      await getTokens(searchText)
+        .then((response) => {
+          setLoading(false)
+          setSearchResults(response)
+        })
+        .catch((error) => {
+          handleError(error)
+        })
+    }
+    const debounceTime = isEmpty(searchText) ? 0 : 1000
     const debounceSearch = () => {
       clearTimeout(timer)
-      timer = setTimeout(getVendorsListData, 1000)
+      timer = setTimeout(getTokenList, debounceTime)
     }
     debounceSearch()
     return () => {
@@ -41,11 +58,12 @@ const VendorSearchScreen = () => {
         <View
           style={{
             paddingHorizontal: 10,
-            width: SCREEN_WIDTH * 1
+            width: SCREEN_WIDTH * 1,
+            marginVertical: 30
           }}
         >
           <SearchbarComponent
-            placeholder={'Search vendor'}
+            placeholder={'Search token'}
             onSearchChange={(val) => setSearchText(val)}
           />
         </View>
@@ -55,20 +73,16 @@ const VendorSearchScreen = () => {
             width: SCREEN_WIDTH * 1
           }}
         >
-
           <FlatList
             data={searchResults}
             keyExtractor={(item, index) => item.id + index.toString()}
             refreshing={loading}
-            scrollEnabled
-            showsVerticalScrollIndicator
-            renderItem={({ item }) => <VendorCardItem cardItems={item} />}
+            renderItem={({ item }) => <TokenCardItem cardItems={item} />}
           />
-
         </View>
       </View>
     </SafeAreaView>
   )
 }
 
-export default VendorSearchScreen
+export default TokenListScreen

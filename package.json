@@ -25,6 +25,7 @@
     "expo-image-picker": "~14.0.2",
     "expo-status-bar": "~1.4.2",
     "formik": "^2.2.9",
+    "lodash": "^4.17.21",
     "react": "18.1.0",
     "react-native": "0.70.8",
     "react-native-chonse-select": "^1.0.5",
