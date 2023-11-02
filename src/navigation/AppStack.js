@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import HomeScreen from '../screens/HomeScreen'
 import GenerateTokenTabs from '../screens/GenerateTokenTabs'
 import GenerateTokenScreen from '../screens/GenerateTokenScreen'
+import TokenListScreen from '../screens/TokenListScreen'
 
 const Drawer = createDrawerNavigator()
 
@@ -29,6 +30,15 @@ const AppStack = () => {
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="home-outline" size={22} color={color} />
+          )
+        }}
+      />
+       <Drawer.Screen
+        name="Token List"
+        component={TokenListScreen}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="key-outline" size={22} color={color} />
           )
         }}
       />

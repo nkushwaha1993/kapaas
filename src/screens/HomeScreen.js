@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const tiles = [
   {
@@ -9,20 +10,26 @@ const tiles = [
     profile: 'Search Vendor'
   },
   {
-    title: 'Quality Check',
+    title: 'Token List',
     page: 'Page2',
+    color: 'red',
+    profile: 'Token List'
+  },
+  {
+    title: 'Quality Check',
+    page: 'Page3',
     color: 'green',
     profile: 'Generate Token'
   },
   {
     title: 'Weighing',
-    page: 'Page3',
+    page: 'Page4',
     color: 'blue',
     profile: 'Generate Token'
   },
   {
     title: 'Payment and Billing',
-    page: 'Page4',
+    page: 'Page5',
     color: 'yellow',
     profile: 'Generate Token'
   }
@@ -30,6 +37,7 @@ const tiles = [
 
 const HomeScreen = ({ navigation }) => {
   return (
+    <ScrollView>
     <View>
       <View style={styles.container}>
         {tiles.map((tile) => (
@@ -44,8 +52,10 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </TouchableHighlight>
         ))}
+
       </View>
     </View>
+    </ScrollView>
   )
 }
 
@@ -55,10 +65,14 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     width: '100%',
     height: '85%',
-    padding: 5
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 20
+
   },
   tile: {
-    width: '50%',
+    width: '30%',
     height: '50%',
     padding: 5,
     aspectRatio: 1,
